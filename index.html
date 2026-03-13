@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moonix.lol | Minecraft Server</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0d16;
+            --primary: #2ecc71; /* Zelená podle tvé Carnivoret bedny */
+            --secondary: #27ae60;
+            --text: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Pozadí s efektem hvězd */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #162a1c 0%, #0d0d16 100%);
+            z-index: -1;
+        }
+
+        /* Navigace */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 10%;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .discord-link {
+            text-decoration: none;
+            color: white;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .discord-link:hover { background: #5865F2; }
+
+        /* Hero Sekce */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* IP Box */
+        .ip-container {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .ip-container:hover {
+            background: rgba(46, 204, 113, 0.1);
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .ip-text { font-weight: 600; font-size: 1.4rem; }
+        .copy-hint { font-size: 0.8rem; color: var(--primary); text-transform: uppercase; }
+
+        /* O nás sekce */
+        .about {
+            padding: 100px 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px;
+            opacity: 0.4;
+            font-size: 0.9rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">MOONIX<span>.LOL</span></div>
+        <a href="https://discord.gg/TVUJ_INVITE" class="discord-link">Discord Server</a>
+    </nav>
+
+    <main class="hero">
+        <h1>Příští dobrodružství<br>začíná na Měsíci.</h1>
+        <p>Unikátní survival server s propracovanou ekonomikou, komunitou a pravidelnými eventy.</p>
+        
+        <div class="ip-container" onclick="copyIP()">
+            <div>
+                <div class="copy-hint">Klikni pro kopírování IP</div>
+                <div class="ip-text" id="ip">play.moonix.lol</div>
+            </div>
+        </div>
+    </main>c
+
+    <section class="about">
+        <div class="feature-card">
+            <h3>Pravidelné Eventy</h3>
+            <p>Každý týden pořádáme soutěže o hodnotné ceny. U nás se nikdy nebudeš nudit!</p>
+        </div>
+        <div class="feature-card">
+            <h3>Stabilní Ekonomika</h3>
+            <p>Propracovaný obchod, aukce a systém jobů, který dává smysl každému hráči.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Přátelská Komunita</h3>
+            <p>Náš admin tým je tu pro tebe 24/7. Zakládáme si na slušném chování a férovém přístupu.</p>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 Moonix.lol | Nejsme spojeni s firmou Mojang AB.
+    </footer>
+
+    <script>
+        function copyIP() {
+            const ip = "play.moonix.lol";
+            navigator.clipboard.writeText(ip).then(() => {
+                alert("IP adresa play.moonix.lol byla zkopírována! Těšíme se na tebe ve hře.");
+            });
+        }
+    </script>
+</body>
+</html>
