@@ -17,10 +17,13 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #1a1a1a; /* Profesionální tmavě šedá */
+            /* Čistě antracitové pozadí bez obrázku */
+            background-color: #1a1a1a; 
             color: #f5f5f5;
             line-height: 1.6;
             overflow-x: hidden;
+            /* Odsazení kvůli fixní navigaci */
+            padding-top: 80px; 
         }
 
         .container {
@@ -79,43 +82,18 @@
 
         .btn-store {
             background: #9d4edd;
+            color: #fff;
             padding: 10px 22px;
             border-radius: 5px;
             font-weight: 600 !important;
+            text-decoration: none;
             transition: 0.3s;
+            display: inline-block;
         }
 
         .btn-store:hover {
             background: #7b2cbf;
             transform: scale(1.05);
-        }
-
-        /* Hero Sekce */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
-                        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop') no-repeat center center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            font-weight: 800;
-        }
-
-        .hero .highlight {
-            color: #9d4edd;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            color: #bbb;
         }
 
         /* Sekce Obecně */
@@ -188,8 +166,9 @@
             letter-spacing: 1px;
         }
 
-        .locked { background: #444; color: #aaa; }
-        .online { background: #2d6a4f; color: #95d5b2; }
+        /* Upravené barvy stavů */
+        .online { background: #2d6a4f; color: #95d5b2; } /* Zelená pro aktivní */
+        .pripravujeme { background: #444; color: #aaa; } /* Šedá pro připravujeme */
 
         /* Sociální sítě */
         .social-links {
@@ -229,8 +208,6 @@
         /* Responzivita */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .hero h1 { font-size: 2.8rem; }
-            .hero p { font-size: 1rem; }
             .section { padding: 60px 0; }
         }
     </style>
@@ -241,7 +218,6 @@
         <div class="container nav-content">
             <div class="logo">MOONIX<span>.LOL</span></div>
             <ul class="nav-links">
-                <li><a href="#home">Domů</a></li>
                 <li><a href="#about">O nás</a></li>
                 <li><a href="#minigames">Minihry</a></li>
                 <li><a href="#socials">Sociální sítě</a></li>
@@ -250,21 +226,16 @@
         </div>
     </nav>
 
-    <header id="home" class="hero">
-        <div class="hero-text">
-            <h1>MOONIX<span class="highlight">.LOL</span></h1>
-            <p>Profesionální Minecraft server s unikátní atmosférou.</p>
-            <a href="#about" style="text-decoration: none;" class="btn-store">Prozkoumat server</a>
-        </div>
-    </header>
-
     <section id="about" class="container section">
         <div class="section-title">
-            <h2>Kdo jsme?</h2>
+            <h1>MOONIX<span style="color: #9d4edd;">.LOL</span></h1> 
             <div class="underline"></div>
+            <p style="color: #bbb; margin-top: 10px;">Profesionální Minecraft server s unikátní atmosférou.</p>
         </div>
         <div class="about-content">
             <p>Vítejte na <strong>Moonix.lol</strong>. Jsme rostoucí Minecraft komunita, která si zakládá na kvalitě, stabilitě a férovém přístupu. Naším cílem je vytvořit místo, kde se hráči cítí dobře a kde herní systémy dávají smysl. Nehledejte u nás nudu – neustále vyvíjíme nové prvky, které posouvají zážitek z hraní na novou úroveň.</p>
+            <br>
+            <a href="#" class="btn-store">Přejít do obchodu</a>
         </div>
     </section>
 
@@ -277,17 +248,17 @@
             <div class="card">
                 <h3>Survival</h3>
                 <p>Náš hlavní mód s propracovanou ekonomikou a MoonixPassem.</p>
-                <span class="status locked">🔒 PŘIPRAVUJEME</span>
+                <span class="status online">● AKTIVNÍ</span>
             </div>
             <div class="card">
                 <h3>EggWars</h3>
                 <p>Klasická bitva o vejce na originálních mapách.</p>
-                <span class="status online">● ONLINE</span>
+                <span class="status pripravujeme">🔒 PŘIPRAVUJEME</span>
             </div>
             <div class="card">
                 <h3>Hunters</h3>
                 <p>Unikátní herní mód zaměřený na lov a strategii.</p>
-                <span class="status online">● ONLINE</span>
+                <span class="status pripravujeme">🔒 PŘIPRAVUJEME</span>
             </div>
         </div>
     </section>
@@ -300,7 +271,7 @@
         <div class="social-links">
             <a href="https://discord.gg/jssNNAzusR" target="_blank" class="social-card discord">
                 <h3>Discord</h3>
-                <p>Připoj se k 500+ hráčům</p>
+                <p>Pojďme dosáhnout 500+ lidí!</p> 
             </a>
             <a href="https://www.instagram.com/moonix.lol/" target="_blank" class="social-card instagram">
                 <h3>Instagram</h3>
