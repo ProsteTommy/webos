@@ -3,196 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moonix.lol | Minecraft Mini-Games</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Moonix.lol | Oficiální web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* DEFINICE BAREV - TADY JE JEN FIALOVÁ A ČERNÁ */
-        :root {
-            --bg: #050508;
-            --primary: #a04ef6; /* Jasná fialová */
-            --secondary: #6e21c0; /* Tmavě fialová */
-            --accent: #d7b1ff; /* Světlá neonová */
-            --text: #ffffff;
-            --card-bg: rgba(20, 10, 35, 0.8);
+        /* --- CSS STYLY --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a1a; /* Profesionální tmavě šedá */
+            color: #f5f5f5;
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Fialová mlhovina na pozadí */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #1a0b35 0%, #050508 100%);
-            z-index: -1;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 10%;
-        }
-
-        .logo { font-size: 28px; font-weight: 800; text-transform: uppercase; }
-        .logo span { color: var(--primary); text-shadow: 0 0 15px var(--primary); }
-
-        .discord-link {
-            text-decoration: none;
-            color: white;
-            background: rgba(160, 78, 246, 0.2);
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: 600;
-            border: 1px solid var(--primary);
-            transition: 0.3s;
-        }
-
-        .discord-link:hover { background: var(--primary); box-shadow: 0 0 20px var(--primary); }
-
-        .hero {
-            height: 70vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+        .container {
+            max-width: 1100px;
+            margin: auto;
             padding: 0 20px;
         }
 
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 5.5rem);
-            line-height: 1.1;
-            margin-bottom: 20px;
-            background: linear-gradient(to bottom, #fff 30%, var(--primary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Navigace */
+        nav {
+            background: rgba(20, 20, 20, 0.98);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid #9d4edd; /* Fialový akcent Moonix */
         }
 
-        .ip-container {
-            background: rgba(160, 78, 246, 0.1);
-            border: 2px solid var(--secondary);
-            padding: 20px 40px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.4s;
-            text-align: center;
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
 
-        .ip-container:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 0 40px rgba(160, 78, 246, 0.4);
-        }
-
-        .ip-text { font-weight: 800; font-size: 1.6rem; letter-spacing: 1px; }
-        .copy-hint { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; }
-
-        /* SEKCE MINIHRY */
-        .minigames {
-            padding: 80px 10%;
-            text-align: center;
-        }
-
-        .minigames h2 {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+        .logo span {
+            color: #9d4edd;
         }
 
-        .game-card {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 24px;
-            border: 1px solid rgba(160, 78, 246, 0.2);
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 400;
             transition: 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #9d4edd;
+        }
+
+        .btn-store {
+            background: #9d4edd;
+            padding: 10px 22px;
+            border-radius: 5px;
+            font-weight: 600 !important;
+            transition: 0.3s;
+        }
+
+        .btn-store:hover {
+            background: #7b2cbf;
+            transform: scale(1.05);
+        }
+
+        /* Hero Sekce */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .hero .highlight {
+            color: #9d4edd;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: #bbb;
+        }
+
+        /* Sekce Obecně */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        .underline {
+            width: 80px;
+            height: 4px;
+            background: #9d4edd;
+            margin: 10px auto;
+        }
+
+        /* O nás */
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        /* Minihry Karty */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #222;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            transition: 0.4s;
+            border: 1px solid #333;
             position: relative;
             overflow: hidden;
         }
 
-        .game-card:hover {
-            border-color: var(--primary);
-            transform: scale(1.02);
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #9d4edd;
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.1);
         }
 
-        .game-card h3 { color: var(--accent); font-size: 1.8rem; margin-bottom: 10px; }
-        
-        /* Štítek "Ve vývoji" */
-        .dev-badge {
-            background: #e74c3c;
-            color: white;
-            font-size: 10px;
-            padding: 3px 10px;
-            border-radius: 5px;
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            text-transform: uppercase;
+        .card h3 {
+            font-size: 1.5rem;
+            margin: 15px 0;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        footer { text-align: center; padding: 60px; opacity: 0.3; font-size: 0.8rem; }
+        .locked { background: #444; color: #aaa; }
+        .online { background: #2d6a4f; color: #95d5b2; }
 
+        /* Sociální sítě */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .social-card {
+            text-decoration: none;
+            color: #fff;
+            padding: 40px;
+            width: 320px;
+            border-radius: 15px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .discord { background: #5865F2; }
+        .instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+
+        .social-card:hover { 
+            filter: brightness(1.1);
+            transform: scale(1.03);
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            background: #111;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+        }
+
+        /* Responzivita */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero p { font-size: 1rem; }
+            .section { padding: 60px 0; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">MOONIX<span>.LOL</span></div>
-        <a href="#" class="discord-link">Discord</a>
+        <div class="container nav-content">
+            <div class="logo">MOONIX<span>.LOL</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Domů</a></li>
+                <li><a href="#about">O nás</a></li>
+                <li><a href="#minigames">Minihry</a></li>
+                <li><a href="#socials">Sociální sítě</a></li>
+                <li><a href="#" class="btn-store">Obchod</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <main class="hero">
-        <h1>Vesmír plný her.</h1>
-        <p style="color: #bbb; margin-bottom: 30px;">Připoj se na nejrychleji rostoucí CZ/SK server.</p>
-        
-        <div class="ip-container" onclick="copyIP()">
-            <div class="copy-hint">Klikni pro kopírování</div>
-            <div class="ip-text">play.moonix.lol</div>
+    <header id="home" class="hero">
+        <div class="hero-text">
+            <h1>MOONIX<span class="highlight">.LOL</span></h1>
+            <p>Profesionální Minecraft server s unikátní atmosférou.</p>
+            <a href="#about" style="text-decoration: none;" class="btn-store">Prozkoumat server</a>
         </div>
-    </main>
+    </header>
 
-    <section class="minigames">
-        <h2>Naše <span style="color: var(--primary)">Minihry</span></h2>
+    <section id="about" class="container section">
+        <div class="section-title">
+            <h2>Kdo jsme?</h2>
+            <div class="underline"></div>
+        </div>
+        <div class="about-content">
+            <p>Vítejte na <strong>Moonix.lol</strong>. Jsme rostoucí Minecraft komunita, která si zakládá na kvalitě, stabilitě a férovém přístupu. Naším cílem je vytvořit místo, kde se hráči cítí dobře a kde herní systémy dávají smysl. Nehledejte u nás nudu – neustále vyvíjíme nové prvky, které posouvají zážitek z hraní na novou úroveň.</p>
+        </div>
+    </section>
+
+    <section id="minigames" class="container section">
+        <div class="section-title">
+            <h2>Naše Minihry</h2>
+            <div class="underline"></div>
+        </div>
         <div class="grid">
-            <div class="game-card">
+            <div class="card">
                 <h3>Survival</h3>
-                <p>Survival-Locked s propracovanou ekonomikou a eventy.</p>
+                <p>Náš hlavní mód s propracovanou ekonomikou a MoonixPassem.</p>
+                <span class="status locked">🔒 PŘIPRAVUJEME</span>
             </div>
-            <div class="game-card">
-                <div class="dev-badge">Ve vývoji</div>
+            <div class="card">
                 <h3>EggWars</h3>
-                <p>Ochraňuj své vejce a znič ostatní týmy v epické bitvě.</p>
+                <p>Klasická bitva o vejce na originálních mapách.</p>
+                <span class="status online">● ONLINE</span>
             </div>
-            <div class="game-card">
-                <div class="dev-badge">Ve vývoji</div>
+            <div class="card">
                 <h3>Hunters</h3>
-                <p>Staň se lovcem nebo kořistí v tomto napínavém módu.</p>
+                <p>Unikátní herní mód zaměřený na lov a strategii.</p>
+                <span class="status online">● ONLINE</span>
             </div>
         </div>
     </section>
 
+    <section id="socials" class="container section">
+        <div class="section-title">
+            <h2>Sociální sítě</h2>
+            <div class="underline"></div>
+        </div>
+        <div class="social-links">
+            <a href="https://discord.gg/jssNNAzusR" target="_blank" class="social-card discord">
+                <h3>Discord</h3>
+                <p>Připoj se k 500+ hráčům</p>
+            </a>
+            <a href="https://www.instagram.com/moonix.lol/" target="_blank" class="social-card instagram">
+                <h3>Instagram</h3>
+                <p>Novinky a behind-the-scenes</p>
+            </a>
+        </div>
+    </section>
+
     <footer>
-        &copy; 2026 MOONIX.LOL | Nejsme spojeni s firmou Mojang AB.
+        <p>&copy; 2026 Moonix.lol | Všechna práva vyhrazena.</p>
     </footer>
 
-    <script>
-        function copyIP() {
-            navigator.clipboard.writeText("play.moonix.lol");
-            alert("IP adresa zkopírována! Těšíme se na tebe.");
-        }
-    </script>
 </body>
 </html>
