@@ -7,31 +7,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
+        /* --- PŮVODNÍ DESIGN ZŮSTÁVÁ --- */
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #0c0c0c;
+            background-color: #121212;
             color: #f5f5f5;
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Canvas pozadí */
-        #particle-canvas {
-            position: absolute;
+        /* Canvas na pozadí */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 1000px; /* Pokrývá Hero i O nás */
-            z-index: 1;
-            pointer-events: none; /* Aby šlo klikat na tlačítka pod tím */
+            z-index: 1; /* Pozadí */
+            background-color: #121212;
         }
 
         .content-wrapper { position: relative; z-index: 10; }
 
+        .container { max-width: 1100px; margin: auto; padding: 0 20px; }
+
         /* Navigace */
         nav {
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(15, 15, 15, 0.95);
             height: 90px;
             display: flex;
             align-items: center;
@@ -39,14 +42,16 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            border-bottom: 2px solid #9d4edd;
+            border-bottom: 3px solid #9d4edd;
         }
 
-        .container { max-width: 1100px; margin: auto; padding: 0 20px; }
         .nav-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .logo { font-size: 2rem; font-weight: 800; text-transform: uppercase; }
+        .logo { font-size: 2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
         .logo span { color: #9d4edd; }
-        
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li a { color: #fff; text-decoration: none; margin-left: 30px; font-weight: 400; text-transform: uppercase; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links li a:hover { color: #9d4edd; }
+
         .btn-store {
             background: #9d4edd;
             padding: 12px 25px;
@@ -55,54 +60,140 @@
             color: white;
             text-decoration: none;
             transition: 0.4s;
+            box-shadow: 0 4px 15px rgba(157, 78, 221, 0.3);
         }
 
-        /* Sekce */
+        .btn-store:hover { background: #7b2cbf; transform: translateY(-3px); }
+
+        /* Hero */
         .hero { padding: 200px 0 100px; text-align: center; }
-        .hero h1 { font-size: 5.5rem; font-weight: 800; margin-bottom: 10px; }
-        .hero span { color: #9d4edd; }
+        .hero h1 { font-size: 5rem; font-weight: 800; margin-bottom: 20px; }
+        .hero h1 span { color: #9d4edd; }
+        .hero p { font-size: 1.2rem; color: #aaa; max-width: 600px; margin: 0 auto 40px; }
 
-        .section { padding: 100px 0; }
-        .section-header { text-align: center; margin-bottom: 50px; }
-        .line { width: 50px; height: 4px; background: #9d4edd; margin: 10px auto; border-radius: 2px; }
+        /* Sekce */
+        .section { padding: 80px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; text-transform: uppercase; }
+        .line { width: 60px; height: 4px; background: #9d4edd; margin: 10px auto; border-radius: 2px; }
 
-        .about-box {
-            background: rgba(20, 20, 20, 0.6);
-            backdrop-filter: blur(5px);
-            padding: 50px;
-            border-radius: 20px;
-            border: 1px solid rgba(157, 78, 221, 0.2);
+        .about-text {
             text-align: center;
             max-width: 800px;
             margin: auto;
+            color: #ccc;
+            background: rgba(25, 25, 25, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(157, 78, 221, 0.2);
         }
 
-        /* Karty Miniher */
+        /* Minihry */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .card {
-            background: #181818;
+            background: rgba(28, 28, 28, 0.8);
             padding: 40px;
             border-radius: 20px;
             text-align: center;
-            border: 1px solid #222;
-            transition: 0.3s;
+            border: 1px solid #2a2a2a;
+            transition: 0.4s;
         }
-        .card:hover { border-color: #9d4edd; transform: translateY(-5px); }
-        .status { display: inline-block; margin-top: 15px; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.8rem; }
-        .active { background: #2d6a4f; color: #fff; }
-        .waiting { background: #333; color: #aaa; }
+        .card:hover { border-color: #9d4edd; transform: translateY(-10px); background: rgba(35, 35, 35, 0.9); }
+        .status { display: inline-block; margin-top: 20px; padding: 8px 20px; border-radius: 30px; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; }
+        .active { background: #2d6a4f; color: #95d5b2; }
+        .waiting { background: #333; color: #999; }
 
-        footer { text-align: center; padding: 40px; color: #444; }
+        /* --- NOVÁ SEKCE NÁŠ TÝM - STYLY --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .team-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: #9d4edd;
+            box-shadow: 0 10px 25px rgba(157, 78, 221, 0.15);
+        }
+
+        .avatar-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        /* Přidaný efekt záře pro avatary při hoveru na kartu */
+        .team-card:hover .avatar-container {
+            border-color: #9d4edd;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+        }
+
+        .team-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s ease;
+        }
+
+        .team-card:hover .team-avatar {
+            transform: scale(1.1);
+        }
+
+        .team-role {
+            color: #9d4edd; /* Fialová pro role */
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .team-name {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Sociální sítě */
+        .social-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .social-box { width: 350px; padding: 40px; border-radius: 20px; text-decoration: none; color: white; text-align: center; transition: 0.4s; }
+        .dc { background: #5865F2; }
+        .ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .social-box:hover { transform: scale(1.05); }
+
+        footer { text-align: center; padding: 60px; color: #555; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    <canvas id="particle-canvas"></canvas>
+    <div id="particles-js"></div>
 
     <div class="content-wrapper">
         <nav>
             <div class="container nav-content">
                 <div class="logo">MOONIX<span>.LOL</span></div>
+                <ul class="nav-links">
+                    <li><a href="#about">O nás</a></li>
+                    <li><a href="#minigames">Minihry</a></li>
+                    <li><a href="#team">Tým</a></li> <li><a href="#socials">Kontakt</a></li>
+                </ul>
                 <a href="#" class="btn-store">OBCHOD</a>
             </div>
         </nav>
@@ -110,37 +201,125 @@
         <header class="hero container">
             <h1>MOONIX<span>.LOL</span></h1>
             <p>Vstup do světa, kde komunita a kvalita znamenají vše.</p>
+            <a href="#minigames" class="btn-store" style="background: transparent; border: 2px solid #9d4edd;">Zobrazit Minihry</a>
         </header>
 
-        <section id="about" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>O NÁS</h2>
-                    <div class="line"></div>
-                </div>
-                <div class="about-box">
-                    <p>Moonix.lol je projekt, který staví na originálních nápadech a stabilitě. Naše herní módy jsou laděny k dokonalosti, aby nabízely férovou hru pro každého. Připoj se a buď součástí něčeho velkého.</p>
-                </div>
+        <section id="about" class="container section">
+            <div class="section-header">
+                <h2>O nás</h2>
+                <div class="line"></div>
+            </div>
+            <div class="about-text">
+                <p>Jsme profesionální Minecraft server zaměřený na kvalitu. Naším cílem je přinášet unikátní zážitek, stabilitu a férové prostředí pro každého hráče.</p>
             </div>
         </section>
 
-        <section class="container section">
+        <section id="minigames" class="container section">
+            <div class="section-header">
+                <h2>Minihry</h2>
+                <div class="line"></div>
+            </div>
             <div class="grid">
                 <div class="card">
                     <h3>Survival</h3>
                     <p>Hlavní mód s ekonomikou a MoonixPassem.</p>
-                    <span class="status active">AKTIVNÍ</span>
+                    <span class="status active">● AKTIVNÍ</span>
                 </div>
                 <div class="card">
                     <h3>EggWars</h3>
                     <p>Bitva o vejce na originálních mapách.</p>
-                    <span class="status waiting">PŘIPRAVUJEME</span>
+                    <span class="status waiting">🔒 PŘIPRAVUJEME</span>
                 </div>
                 <div class="card">
                     <h3>Hunters</h3>
                     <p>Lov a strategie v unikátním módu.</p>
-                    <span class="status waiting">PŘIPRAVUJEME</span>
+                    <span class="status waiting">🔒 PŘIPRAVUJEME</span>
                 </div>
+            </div>
+        </section>
+
+        <section id="team" class="container section">
+            <div class="section-header">
+                <h2>Náš Tým</h2>
+                <div class="line"></div>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="avatar-container">
+                        <img src="https://image-hosting.com/Tommy.png" alt="Server Owner" class="team-avatar">
+                    </div>
+                    <p class="team-role">Server Owner</p>
+                    <p class="team-name">Proste_Tommy</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="avatar-container">
+                        <img src="https://image-hosting.com/Zejik.png" alt="Server Management" class="team-avatar">
+                    </div>
+                    <p class="team-role">Server Management</p>
+                    <p class="team-name">Zejík</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="avatar-container">
+                        <img src="https://image-hosting.com/unfair.png" alt="Admin" class="team-avatar">
+                    </div>
+                    <p class="team-role">Admin</p>
+                    <p class="team-name">unfair</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="avatar-container">
+                        <img src="https://image-hosting.com/Honzaak.png" alt="Developer Team" class="team-avatar">
+                    </div>
+                    <p class="team-role">Developer Team</p>
+                    <p class="team-name">Honzaak</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="avatar-container">
+                        <img src="https://image-hosting.com/Ayaka.png" alt="Discord Moderator" class="team-avatar">
+                    </div>
+                    <p class="team-role">Discord Moderator</p>
+                    <p class="team-name">Ayaka</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="avatar-container">
+                        <img src="https://image-hosting.com/Ronys.png" alt="Helper Team" class="team-avatar">
+                    </div>
+                    <p class="team-role">Helper Team</p>
+                    <p class="team-name">Ronys</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="avatar-container">
+                        <img src="https://image-hosting.com/Neonspark.png" alt="Helper Team" class="team-avatar">
+                    </div>
+                    <p class="team-role">Helper Team</p>
+                    <p class="team-name">Neonspark</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="avatar-container">
+                        <img src="https://image-hosting.com/Honzaak.png" alt="Builder Team" class="team-avatar">
+                    </div>
+                    <p class="team-role">Builder Team</p>
+                    <p class="team-name">Honzaak</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="socials" class="container section">
+            <div class="social-grid">
+                <a href="https://discord.gg/jssNNAzusR" target="_blank" class="social-box dc">
+                    <h3>DISCORD</h3>
+                    <p>Dosáhneme společně 500+ lidí!</p>
+                </a>
+                <a href="https://www.instagram.com/moonix.lol/" target="_blank" class="social-box ig">
+                    <h3>INSTAGRAM</h3>
+                    <p>Sleduj naše novinky!</p>
+                </a>
             </div>
         </section>
 
@@ -149,83 +328,32 @@
         </footer>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particlesArray;
-
-        // Pozice myši
-        let mouse = { x: null, y: null, radius: 100 };
-
-        window.addEventListener('mousemove', function(event) {
-            mouse.x = event.x;
-            mouse.y = event.y + window.scrollY; // Přičítáme scroll, aby to sedělo
-        });
-
-        canvas.width = window.innerWidth;
-        canvas.height = 1200; // Výška oblasti, kde jsou kuličky
-
-        class Particle {
-            constructor(x, y, size) {
-                this.x = x;
-                this.y = y;
-                this.baseX = x;
-                this.baseY = y;
-                this.size = size;
-                this.baseSize = size;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(157, 78, 221, 0.4)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.fill();
-            }
-            update() {
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-
-                // Zvětšení při přejetí (když je myš blízko)
-                if (distance < mouse.radius) {
-                    this.size = this.baseSize * 3; // 3x větší
-                } else {
-                    if (this.size > this.baseSize) {
-                        this.size -= 0.2; // Pomalu se vrací na původní velikost
-                    }
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#9d4edd" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#9d4edd", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 200, "line_linked": { "opacity": 1 } },
+                    "push": { "particles_nb": 4 }
                 }
-                this.draw();
-            }
-        }
-
-        function init() {
-            particlesArray = [];
-            // Hustota kuliček (můžeš změnit)
-            let numberOfParticles = (canvas.width * canvas.height) / 5000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                let x = Math.random() * canvas.width;
-                let y = Math.random() * canvas.height;
-                let size = Math.random() * 2 + 1;
-                particlesArray.push(new Particle(x, y, size));
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
-            requestAnimationFrame(animate);
-        }
-
-        init();
-        animate();
-
-        window.addEventListener('resize', function() {
-            canvas.width = window.innerWidth;
-            init();
+            },
+            "retina_detect": true
         });
     </script>
-
 </body>
 </html>
